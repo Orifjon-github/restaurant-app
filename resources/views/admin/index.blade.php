@@ -1,8 +1,5 @@
 <x-layouts.index>
 
-
-
-
   <main id="main" class="main">
 
     <div class="pagetitle">

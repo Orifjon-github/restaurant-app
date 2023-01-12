@@ -21,11 +21,12 @@ Route::get('/', [\App\Http\Controllers\MenuController::class, 'index']);
          return redirect('admin/login');
      });
      Route::get('/login', [AuthController::class, 'login'])->name('login');
-     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-     Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 //     Route::get('/register', [AuthController::class, 'register'])->name('register');
 //     Route::post('/register', [AuthController::class, 'register_store'])->name('register_store');
      Route::view('/dashboard', 'admin.index');
      Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
  });
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 
