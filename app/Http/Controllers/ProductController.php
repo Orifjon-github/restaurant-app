@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -69,9 +70,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('admin.product.edit')->with(['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -81,9 +83,23 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        if ($request->hasFile('photo')) {
+            if (isset($product->photo)) {
+                Storage::delete($product->photo);
+            }
+            $path = $request->file('photo')->store('product-photos');
+
+        }
+        $product->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'about' => $request->about,
+            'category_id' => $request->category_id,
+            'photo' => $path ?? $product->photo,
+        ]);
+        return redirect()->route('products.index', ['product' => $product->id]);
     }
 
     /**
@@ -92,8 +108,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        if (isset($product->photo)) {
+            Storage::delete($product->photo);
+        }
+
+        $product->delete();
+
+        return redirect()->route('products.index');
     }
 }
