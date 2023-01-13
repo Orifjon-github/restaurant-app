@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -13,7 +14,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = Booking::all();
+        return view('admin.bookings.index')->with(['bookings' => $bookings]);
     }
 
     /**
@@ -34,7 +36,16 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Booking::create([
+            'user_id' => $request->user_id,
+            'phone' => $request->phone,
+            'date' => $request->date,
+            'time' => $request->time,
+            'people' => $request->poeple,
+            'message' => $request->message,
+        ]);
+
+        return redirect('/');
     }
 
     /**

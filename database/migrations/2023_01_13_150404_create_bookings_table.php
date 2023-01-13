@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('phone');
+            $table->date('date');
+            $table->time('time');
+            $table->smallInteger('people');
+            $table->text('message');
             $table->timestamps();
         });
     }

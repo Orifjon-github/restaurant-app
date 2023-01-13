@@ -25,6 +25,7 @@ Route::get('/', [\App\Http\Controllers\MenuController::class, 'index']);
      Route::get('/user-profile', [\App\Http\Controllers\UserProfileController::class, 'user_profile'])->name('user_profile');
      Route::resource('/products', \App\Http\Controllers\ProductController::class);
      Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
+     Route::resource('/bookings', \App\Http\Controllers\BookingController::class);
 
  });
 Route::get('/login', [AuthController::class, 'login'])->name('login');
