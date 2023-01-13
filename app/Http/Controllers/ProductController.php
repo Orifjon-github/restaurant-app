@@ -39,8 +39,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        dd($request->file('photo'));
-
         $path = $request->file('photo')->store('product-photos');
 
         $product = Product::create([

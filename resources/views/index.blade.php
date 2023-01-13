@@ -126,7 +126,7 @@
 
                 @foreach($products as $product)
                 <div class="col-lg-6 menu-item filter-{{$product->category->name}}">
-                    <img src="{{$product->photo}}" class="menu-img" alt="">
+                    <img src="storage/{{$product->photo}}" class="menu-img" alt="">
                     <div class="menu-content">
                         <a href="#">{{$product->name}}</a><span>$ {{$product->price}}</span>
                     </div>
