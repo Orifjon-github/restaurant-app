@@ -54,7 +54,18 @@
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
-        <a href="#book-a-table" class="book-a-table-btn scrollto d-none d-lg-flex">Book a table</a>
+        @auth
+            <a href="#book-a-table" class="book-a-table-btn d-none d-lg-flex">Book a Table</a>
+
+            <form action="{{route('logout')}}" method="POST">
+                @csrf
+
+                <button type="submit" class="btn btn-danger rounded-pill d-none d-lg-flex">Chiqish</button>
+
+            </form>
+        @else
+            <a href="/login" class="book-a-table-btn scrollto d-none d-lg-flex">Login</a>
+        @endauth
 
     </div>
 </header><!-- End Header -->

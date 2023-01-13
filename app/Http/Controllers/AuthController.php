@@ -13,12 +13,12 @@ class AuthController extends Controller
 
     public function login()
     {
-        return view('admin.login');
+        return view('auth.login');
     }
-//    public function register()
-//    {
-//        return view('auth.register');
-//    }
+    public function register()
+    {
+        return view('auth.register');
+    }
 
     public function authenticate(Request $request)
     {
@@ -30,7 +30,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('admin/dashboard');
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
@@ -38,23 +38,23 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
-//    public function register_store(Request $request) {
-//
-//        $validated = $request->validate([
-//            'name' => 'required',
-//            'email' => 'required|email:rfc,dns|unique:users,email',
-//            'password' => 'required|min:8',
-//            'password_confirmation' => 'required|same:password'
-//        ]);
-//
-//        $validated['password'] = Hash::make($validated['password']);
-//
-//        $user = User::create($validated);
-//
-//        auth()->login($user);
-//
-//        return redirect('/')->with('success', "Account successfully registered.");
-//    }
+    public function register_store(Request $request) {
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email:rfc,dns|unique:users,email',
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|same:password'
+        ]);
+
+        $validated['password'] = Hash::make($validated['password']);
+
+        $user = User::create($validated);
+
+        auth()->login($user);
+
+        return redirect('/')->with('success', "Account successfully registered.");
+    }
 
     public function logout(Request $request)
     {
