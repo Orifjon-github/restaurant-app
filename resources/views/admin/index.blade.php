@@ -1,12 +1,12 @@
 <x-layouts.index>
 
-  <main id="main" class="main">
+  <main id="main" class="main" style="margin-left: 0px;">
 
     <div class="pagetitle">
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>

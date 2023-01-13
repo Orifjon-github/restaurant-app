@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Bifshteks',
             'photo' => 'url',
-            'about' => 'bla bla bla',
+            'about' => 'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla',
             'price' => 5,
             'category_id' => 1,
         ]);

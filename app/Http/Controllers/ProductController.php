@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.products');
+        $products = Product::all();
+        return view('admin.product.index')->with(['products' => $products]);
     }
 
     /**
@@ -23,7 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('admin.product.create')->with(['categories' => $categories]);
     }
 
     /**
@@ -34,7 +38,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        dd($request->file('photo'));
+
+        $path = $request->file('photo')->store('product-photos');
+
+        $product = Product::create([
+            'name' => $request->name,
+            'about' => $request->about,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'photo' => $path
+        ]);
+
+        return redirect('admin/products');
     }
 
     /**
